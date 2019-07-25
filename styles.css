@@ -30,10 +30,6 @@ ul {
   	color: blue;
 	}
 
-  img {
-  border-radius: 70%;
-  }
-
 
 
   * {
@@ -63,4 +59,13 @@ p {
   width: 150px;
   height: 150px;
   border-radius: 75%;
+}
+a {
+     text-decoration: none;
+     color:#4056A1;
+    }
+
+.container {
+   margin:0 auto; /* this will center the page */
+   width:1300px; /*  use your width here */
 }
