@@ -36,11 +36,16 @@ ul {
   box-sizing: border-box;
   }
 
+
 div {
-    font-family:Tahoma;
+    font-family:Bitstream Vera Sans Mono;
+    line-height: 1.5;
+    font-weight: 100;
+    font-size:24px
     padding-left: 70px;
     padding-top:30px;
 }
+
 div2 {
     font-family:Tahoma;
     padding-left: 70px;
@@ -49,7 +54,7 @@ div2 {
 
 
 p {
-  font-family: "Monospace", Times, serif;
+  font-family: Tahoma;
   padding-left: 70px;
 }
 
@@ -68,4 +73,17 @@ a {
 .container {
    margin:0 auto; /* this will center the page */
    width:1300px; /*  use your width here */
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.fixed-size-square {
+    display: table;
+    width: 700px;
+    height: 100px;
+    background: #E5E7E9;
 }
