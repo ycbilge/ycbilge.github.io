@@ -1,72 +1,79 @@
+<!doctype html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-  <title>Wildest Faces Project</title>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title> WildestFaces </title>
+</head>
+  <body>
+  	<div class="container">
+      <center>
+        <font color="red"> <h1> Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos
 
-<body>
+ </h1> </font> </br> in WACV 2021 </br>
 
-<div id="primarycontent">
-<center><h1>Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos</h1></center>
-<center><h2><a href="https://ycbilge.github.io/">Yunus Can Bilge</a>*&nbsp;&nbsp;&nbsp; 
-  <a href="/">Mehmet Kerim Yucel</a>*&nbsp;&nbsp;&nbsp;
-  <a href="http://user.ceng.metu.edu.tr/~gcinbis/">Ramazan Gokberk Cinbis</a>&nbsp;&nbsp;&nbsp;
-  <a href="https://web.cs.hacettepe.edu.tr/~nazli/">Nazli Ikizler-Cinbis</a> &nbsp;&nbsp;&nbsp;
-  <a href="https://web.cs.hacettepe.edu.tr/~pinar/">Pinar Duygulu</a></h2></center>
-<center><h2><a href="http://cs.hacettepe.edu.tr">Hacettepe University</a> &nbsp;
-            <a href="http://ceng.metu.edu.tr/">Middle East Technical University</a>
-</h2></center>
-<center><h2>In WACV 2021</h2></center>
-<center><h2><strong><a href="/">Paper</a> | <a href="/">Dataset</a> | <a href="/">PyTorch code</a> </strong> </h2></center>
-<center><a href="">
-<img src="../images/mainfigure_v2.png" width="1000"> </a></center>
-<p></p>
+        <a href="index.html" target="_blank"> Yunus Can Bilge</a> &nbsp;&nbsp;
+        <a href="https://github.com/MKYucel" target="_blank"> Mehmet Kerim Yucel</a> &nbsp;&nbsp;
+        <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp; &nbsp;
+        <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp; &nbsp;
+        <a href="https://web.cs.hacettepe.edu.tr/~pinar" target="_blank"> Pinar Duygulu</a>
+         </br>
+      </center>
+    </br>
 
+   <center>
+     <a href=""> <img src="../images/mainfigure_v2.png" width="1000"> </a>
+   </center>
+   <p></p>
 
- <p>
-<h2>Abstract</h2>
-
-<div style="font-size:14px"><p align="justify">In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using (i) stacked affine-transforms for classifier-transfer, (ii) attention-driven pooling for temporal-adaptation. We additionally formulate a self-attention based model for domain-transfer. We establish a rigorous evaluation protocol for this "clean-to-violent" recognition task, and present a detailed analysis of the proposed dataset and the methods. Our experiments highlight the unique challenges introduced by the WildestFaces dataset and the advantages of the proposed approach.</p></div>
-
-
-
-
-<h2>Paper</h2>
-<p><a href="">Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos</a></p>
+   <b> Abstract</b> </br>
+   <p style="font-family:arial;">
+In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using (i) stacked affine-transforms for classifier-transfer, (ii) attention-driven pooling for temporal-adaptation. We additionally formulate a self-attention based model for domain-transfer. We establish a rigorous evaluation protocol for this "clean-to-violent" recognition task, and present a detailed analysis of the proposed dataset and the methods. Our experiments highlight the unique challenges introduced by the WildestFaces dataset and the advantages of the proposed approach.
 
 
-
-<h2>Methodology</h2>
-<center>
-<img src="../images/AttnAggregationV4.pdf" width="1000"> </a></center>
-<p></p>
-
-
-
-
-
-<h2>Experimental Results</h2>
-<center><a href="">
-<img src="../images/experiment.png" width="1000"> </a></center>
-<p></p>
-
-
-<h2>Citation</h2>
-<p>
-<pre style="display: block; background-color:#F8F9F9;" tab-width:4>
-
-@inproceedings{wildestFaces21,
-author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
-title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
-booktitle = {Winter Conference on Applications of Computer Vision ({WACV})},
-year = {2021}
-}
-</pre>
-(* indicates equal contributions)
 </p>
+    <b> Methodology</b> </br>
+    <img src="../images/AttnAggregationV4.pdf" width="1000"> </a></center>
+    <p></p>
+    <h2>Experimental Results</h2>
+    <img src="../images/experiment.png" width="1000"> </a></center>
+    <p></p>
 
 
+    <br/>
+    <b> Study </b> </br>
+    <ul>
+      <li> Paper : <a href="/" target="_blank"> Will be available soon!</a> </li>
+      <li> Dataset : <a href="TODO" style="color:#008080"> WildestFaces dataset </a> </li>
+    </ul>
+    Please consider citing if you make use of this work and/or the dataset: </br>
+    <pre style="display: block; background-color:#F8F9F9;" tab-width:4>
+      
+      @inproceedings{wildestFaces21,
+      author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
+      title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
+      booktitle = {Winter Conference on Applications of Computer Vision ({WACV})},
+      year = {2021}     
+      }
+      
+      
+    </pre>
+    <!-- add bibtex -->
+    
+    
 
-<br><br>
-</body></html
 
+    </br>    
+      
+  </br>
+    
+    <hr>
+    
+    </br>
+    <a href="index.html"> Back to Home</a> 
+    </div>
+  </body>
+
+</html>
