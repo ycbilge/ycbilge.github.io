@@ -87,3 +87,11 @@ a {
     height: 100px;
     background: #E5E7E9;
 }
+
+
+body, html {
+margin-left:5%;
+margin-right:5%;
+margin-bottom:5%;
+margin-top:5%;
+}
