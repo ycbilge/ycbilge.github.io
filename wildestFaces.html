@@ -1,160 +1,111 @@
 <!doctype html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<head>
-	<link rel="stylesheet" href="styles.css">
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<!-- <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"> -->
-	<link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Raleway">
-
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>WildestFaces</title>
-</head>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
   <body>
-  	<div class="container">
-      <center>
-        <font color="red"> <h1> Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos
+    <div class="wrapper">
+      <header>
+        <h1>WildestFaces</h1>
+        <p>A Dataset for face detection and recognition</p>
+        <p class="view">Download WildestFaces dataset <br/><small> Features and Imdb dataset included.</small></p>
+        <ul>
+          <li><a href="https://arxiv.org/abs/2009.07576">Download <strong>Paper</strong></a></li>
+          <li><a href="https://forms.gle/W3HpNFMWRDQvVDcw9">Download <strong>ZIP File</strong></a></li>
 
-		</h1> </font> in <b> <font color="33C4FF">WACV 2021</font> </b>  </br>  </br>
+        </ul>
+      </header>
+      <section>
+        <h1>Red Carpet to Fight Club: <br/>Partially-supervised Domain Transfer for Face Recognition in Violent Videos</h1>
+        <h5>
+          <a href="index.html" target="_blank"> Yunus Can Bilge<sup>&#9883;</sup></a> &nbsp;
+          <a href="https://www.linkedin.com/in/meyucel/" target="_blank"> Mehmet Kerim Yucel<sup>&#9883;</sup></a> &nbsp;
+          <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp;
+          <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp;
+          <a href="https://web.cs.hacettepe.edu.tr/~pinar" target="_blank"> Pinar Duygulu</a>
+        </h5>
+        <br>
+        <!-- <p><em>View the <a href="http://github.github.com/github-flavored-markdown/sample_content.html">source of this content</a>.</em></p> -->
+        <p><img src="../images/mainfigure_v2.png" width="1000"> </p>
 
-	  <a href="index.html" target="_blank"> Yunus Can Bilge<sup>&#9883;</sup></a> &nbsp;&nbsp;
-        <a href="https://www.linkedin.com/in/meyucel/" target="_blank"> Mehmet Kerim Yucel<sup>&#9883;</sup></a> &nbsp;&nbsp;
-        <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp; &nbsp;
-        <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp; &nbsp;
-        <a href="https://web.cs.hacettepe.edu.tr/~pinar" target="_blank"> Pinar Duygulu</a>
-         </br>
-      </center>
-    </br>
-
-   <center>
-     <a href=""> <img src="../images/mainfigure_v2.png" width="1000"> </a>
-   </center>
-   <p></p>
-
-   <b> Abstract</b> </br>
-   <p style="font-family:verdana">
-In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using (i) stacked affine-transforms for classifier-transfer, (ii) attention-driven pooling for temporal-adaptation. We additionally formulate a self-attention based model for domain-transfer. We establish a rigorous evaluation protocol for this "clean-to-violent" recognition task, and present a detailed analysis of the proposed dataset and the methods. Our experiments highlight the unique challenges introduced by the WildestFaces dataset and the advantages of the proposed approach.
-
-
-</p>
-<b> WildestFaces Dataset </b> </br>
-<p style="font-family:arial;">
-	<center>
-	<div id="videoal">
-		<table>
-		  <tr>
-			  <td>
-			  <img src="../images/ex1.gif" width=250 height=200>
-			  </td>
-			  <td>
-			  <img src="../images/output5_.gif" width=250 height=200>
-			  </td>
-			   <td>
-			  <img src="../images/output10.gif" width=250 height=200>
-			  </td>
-			   <td>
-			  <img src="../images/output11.gif" width=250 height=200>
-			  </td>
-		  </tr> <tr>
-			  <td>
-			  <img src="../images/output8.gif" width=250 height=200>
-			  </td>
-			  <td>
-			  <img src="../images/output18.gif" width=250 height=200>
-			  </td>
-			   <td>
-			  <img src="../images/output19.gif" width=250 height=200>
-			  </td>
-			   <td>
-			  <img src="../images/output29.gif" width=250 height=200>
-			  </td>
-		  </tr>
-		  	
-		  </table>
-     	   </div>
-		
-<br/>
-    <p style="color:red">Additional face annotations are available for face detection!  
-	</center>
-	
-</p>
+        <p>In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using
+        <ul>
+          <li> (i) stacked affine-transforms for classifier-transfer,
+          <li> (ii) attention-driven pooling for temporal-adaptation.
+        </ul>
+        We additionally formulate a self-attention based model for domain-transfer. We establish a rigorous evaluation protocol for this "clean-to-violent" recognition task, and present a detailed analysis of the proposed dataset and the methods. Our experiments highlight the unique challenges introduced by the WildestFaces dataset and the advantages of the proposed approach.
+        </p>
 
 
 
 
-    <b> Methodology</b> </br>
-   <center>
-    <p style="font-family:Raleway:400,300,600;">
-	    <img src="../images/AttnFgr.png" width="1000"> </a></center> </p>
- </center>
-    <p></p>
-<b>Experimental Results</b> </br>
-    <center>
-    <p style="font-family:Raleway:400,300,600;">
-	    <img src="../images/exp_1.png" width="500"> </a></center> </p>
-    <p>
-    </center>
-    <p style="font-family:Raleway:400,300,600;">
-	    Comparison of temporal-adaptation techniques for three different affine classifier-transfer models. Majority-voting is an image-to-image
-	    baseline(image-level classifier transfer). 
-    <p>
-    <center>
-    <p style="font-family:Raleway:400,300,600;">
-	    <img src="../images/exp_2.png" width="500"> </a></center> </p>
-    <p>
-    </center>
-    <p style="font-family:Raleway:400,300,600;">
-	    Comparison of temporal-adaptation techniques for video reprsentation. We report the seperate accuracies of seen and unseen 
-	    classes, together with their harmonic mean.
-    <p>
-    
-</p>
+        <h2>WildestFaces Dataset Samples</h2>
 
 
-    <br/>
-    <b> Study </b> </br>
-    <ul>
-      <li> Paper : <a href="https://arxiv.org/abs/2009.07576" target="_blank"> Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos </a> </li>
-      <li> Dataset : <a href="https://forms.gle/W3HpNFMWRDQvVDcw9" target="_blank" style="color:#008080"> WildestFaces </a> </li>
-    </ul>
-    </br>
-   
+        <div id="videoal">
+  		      <table>
+  		          <tr>
+                  <td><img src="../images/ex1.gif" width=250 height=200></td>
+                  <td><img src="../images/output5_.gif" width=250 height=200></td>
+  			          <td><img src="../images/output10.gif" width=250 height=200></td>
+                  <td><img src="../images/output11.gif" width=250 height=200></td>
+  		          </tr>
+                <tr>
+                  <td><img src="../images/output8.gif" width=250 height=200></td>
+                  <td><img src="../images/output18.gif" width=250 height=200></td>
+                  <td><img src="../images/output19.gif" width=250 height=200></td>
+                  <td><img src="../images/output29.gif" width=250 height=200></td>
+                </tr>
+  		        </table>
+       	</div>
 
 
+        <h2>Methodology</h2>
+        <p><img src="../images/methodology.png" width="1000"> </p>
+        <p> The architecture of the proposed domain transfer approach based on Attentive Temporal Pooling (ATP) layer for temporaladaptation, combined with residual stacked affine classifier-transfer layer. </p>
+
+        <h2>Experimental Results</h2>
+        <p>Comparison of temporal-adaptation techniques for three different affine classifier-transfer models. Majority-voting is an image-to-image baseline(image-level classifier transfer).</p>
+        <center>
+        <img src="../images/exp_1.png" width="400">
+        </center>
+        <br>
+        <p>Comparison of temporal-adaptation techniques for video reprsentation. We report the seperate accuracies of seen and unseen classes, together with their harmonic mean.</p>
+        <center>
+        <img src="../images/exp_2.png" width="400">
+        </center>
+
+        <h2>Citation</h2>
+
+        <p>Please cite if you make use of this work and/or the dataset:</p>
+        <pre style="font-size: 11px">
+        <code>
+          @inproceedings{wildestFaces21,
+            author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
+            title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
+            booktitle = {Winter Conference on Applications of Computer Vision ({WACV})},
+            year = {2021}
+          }
+       </code>
+     </pre>
+
+        <p><sup>&#9883;</sup> indicates equal contribution. </p>
+        <p>Based on the template by <a href="https://github.com/orderedlist/minimal/">Steve Smith</a>.</p>
+      </section>
+      <footer>
 
 
-
-   
-    </p>
-    </br>
-    Please cite if you make use of this work and/or the dataset: </br>
-    <pre style="display: block; background-color:#F8F9F9;" tab-width:4>
-      
-      @inproceedings{wildestFaces21,
-      author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
-      title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
-      booktitle = {Winter Conference on Applications of Computer Vision ({WACV})},
-      year = {2021}     
-      }
-      
-      
-    </pre>
-    <!-- add bibtex -->
-    
-    
-
-
-    </br>    
-      
-  </br>
-    <p style="font-family:Raleway:400,300,600;">
-	   <sup>&#9883;</sup> indicates equal contribution. </p> 
-    <hr>
-    
-    </br>
-    <a href="index.html"> Back to Home</a> 
+      </footer>
     </div>
-   
+    <script src="javascripts/scale.fix.js"></script>
   </body>
-
 </html>
