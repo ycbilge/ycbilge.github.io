@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>WildestFaces</title>
+    <title>Project page for Red Carpet to Fight Club</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,28 +15,24 @@
   <body>
     <div class="wrapper">
       <header>
-        <!-- <h1>WildestFaces</h1>
-        <p>A Dataset for face detection and recognition</p>
-        <p class="view">Download WildestFaces dataset <br/><small> Features and Imdb dataset included.</small></p> -->
-        <p class="view">Download WildestFaces dataset. </p>
         <ul>
-          <li><a href="https://arxiv.org/abs/2009.07576">Download <strong>Paper</strong></a></li>
+          <li><a href="https://arxiv.org/abs/2009.07576">Download <strong>Paper</strong></a></li> 
           <li><a href="https://forms.gle/W3HpNFMWRDQvVDcw9">Download <strong>Dataset</strong></a></li>
-
         </ul>
       </header>
-      <section>
+<section>        
         <h1>Red Carpet to Fight Club: <br/>Partially-supervised Domain Transfer for Face Recognition in Violent Videos</h1>
-        <h5>
-          <a href="index.html" target="_blank"> Yunus Can Bilge<sup>&#9883;</sup></a> &nbsp;
-          <a href="https://www.linkedin.com/in/meyucel/" target="_blank"> Mehmet Kerim Yucel<sup>&#9883;</sup></a> &nbsp;
+        <h4>
+          <a href="index.html" target="_blank"> Yunus Can Bilge<sup>&#9733;</sup></a> &nbsp;
+          <a href="https://www.linkedin.com/in/meyucel/" target="_blank"> Mehmet Kerim Yucel<sup>&#9733;</sup></a> &nbsp;
           <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp;
           <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp;
           <a href="https://web.cs.hacettepe.edu.tr/~pinar" target="_blank"> Pinar Duygulu</a>
-        </h5>
+        </h4>
         <br>
+        
         <!-- <p><em>View the <a href="http://github.github.com/github-flavored-markdown/sample_content.html">source of this content</a>.</em></p> -->
-        <p><img src="../images/mainfigure_v2.png" width="1000"> </p>
+        <p><img src="images/transfer.gif" > </p>
 
         <p>In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using
         <ul>
@@ -47,43 +43,25 @@
         </p>
 
 
-
-
         <h2>WildestFaces Dataset Samples</h2>
 
 
         <div id="videoal">
-  		      <table>
-  		          <tr>
-                  <td><img src="../images/ex1.gif" width=250 height=200></td>
-                  <td><img src="../images/output5_.gif" width=250 height=200></td>
-  			          <td><img src="../images/output10.gif" width=250 height=200></td>
-                  <td><img src="../images/output11.gif" width=250 height=200></td>
-  		          </tr>
-                <tr>
-                  <td><img src="../images/output8.gif" width=250 height=200></td>
-                  <td><img src="../images/output18.gif" width=250 height=200></td>
-                  <td><img src="../images/output19.gif" width=250 height=200></td>
-                  <td><img src="../images/output29.gif" width=250 height=200></td>
-                </tr>
-  		        </table>
+  		  <img src="images/ex1.gif" width=200 height=150>
+          <img src="images/output5_.gif" width=200 height=150>
+  		  <img src="images/output10.gif" width=200 height=150>
+           <img src="images/output11.gif" width=200 height=150>
+  		   <br>
+                <br>
+                  <img src="images/output8.gif" width=200 height=150>
+                  <img src="images/output18.gif" width=200 height=150>
+                  <img src="images/output19.gif" width=200 height=150>
+                  <img src="images/output29.gif" width=200 height=150>
+                  
+              <br>
+              <br>  
        	</div>
 
-
-        <h2>Methodology</h2>
-        <p><img src="../images/methodology.png" width="1000"> </p>
-        <p> The architecture of the proposed domain transfer approach based on Attentive Temporal Pooling (ATP) layer for temporaladaptation, combined with residual stacked affine classifier-transfer layer. </p>
-
-        <h2>Experimental Results</h2>
-        <p>Comparison of temporal-adaptation techniques for three different affine classifier-transfer models. Majority-voting is an image-to-image baseline(image-level classifier transfer).</p>
-        <center>
-        <img src="../images/exp_1.png" width="400">
-        </center>
-        <br>
-        <p>Comparison of temporal-adaptation techniques for video reprsentation. We report the seperate accuracies of seen and unseen classes, together with their harmonic mean.</p>
-        <center>
-        <img src="../images/exp_2.png" width="400">
-        </center>
 
         <h2>Citation</h2>
 
@@ -93,20 +71,18 @@
           @inproceedings{wildestFaces21,
             author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
             title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
-            booktitle = {Winter Conference on Applications of Computer Vision ({WACV})},
+            booktitle = {WACV},
             year = {2021}
           }
        </code>
      </pre>
 
-        <p><sup>&#9883;</sup> indicates equal contribution. </p>
+        <p><sup>&#9733;</sup> indicates equal contribution. </p>
+        <br><br><br><br>
         <p>Based on the template by <a href="https://github.com/orderedlist/minimal/">Steve Smith</a>.</p>
-      </section>
-      <footer>
-
-
-      </footer>
-    </div>
+    
+    </section>
+           </div>
     <script src="javascripts/scale.fix.js"></script>
   </body>
 </html>
