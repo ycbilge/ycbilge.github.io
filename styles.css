@@ -1,0 +1,89 @@
+ul {
+  	list-style: none;
+	}
+
+	ul li::before {
+  	content: "\2022";
+  	color: red;
+  	font-weight: bold;
+  	display: inline-block; 
+  	width: 1em;
+  	margin-left: -1em;
+    padding-left: 70px;
+	}
+
+	.fa {
+  	padding: 10px;
+  	font-size: 20px;
+  	width: 25px;
+  	text-align: center;
+  	text-decoration: none;
+  	margin: 5px 2px;
+	}
+
+	.fa:hover {
+    	opacity: 0.7;
+	}
+
+	.fa-twitter {
+  	background: ;
+  	color: blue;
+	}
+
+
+
+  * {
+  box-sizing: border-box;
+  }
+
+
+div {
+    font-family:Bitstream Vera Sans Mono;
+    line-height: 1.5;
+    font-weight: 100;
+    font-size:24px
+    padding-left: 70px;
+    padding-top:30px;
+}
+
+div2 {
+    font-family:Tahoma;
+    padding-left: 70px;
+    
+}
+
+
+p {
+  font-family: Times New Roman;
+}
+
+.avatar {
+  transform:rotate(90deg);
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 75%;
+}
+a {
+     text-decoration: none;
+     color:#4056A1;
+    }
+
+.container {
+   margin:0 auto; /* this will center the page */
+   width:1300px; /*  use your width here */
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.fixed-size-square {
+    display: table;
+    width: 700px;
+    height: 100px;
+    background: #E5E7E9;
+}
+

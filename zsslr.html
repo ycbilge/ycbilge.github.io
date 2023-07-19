@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title> Zero-Shot Sign Language Recognition </title>
+</head>
+  <body>
+  	<div class="container">
+      <center>
+        <font color="red"> <h1> Zero-Shot Sign Language Recognition : </br>Can Textual Data Uncover Sign Languages? </h1> </font> </br> </br>
+
+        <a href="index.html" target="_blank"> Yunus Can Bilge</a> &nbsp;&nbsp;
+ <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp; &nbsp;
+
+
+        <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> </br>
+      </center>
+    </br>
+      <b> Abstract</b> </br>
+      <p style="font-family:arial;">
+    We introduce the problem of zero-shot sign language recognition (ZSSLR), where the goal is to leverage models learned over the seen sign class examples to recognize the instances of unseen signs. To this end, we propose to utilize the readily available descriptions in sign language dictionaries as an intermediate-level semantic representation for knowledge transfer. We introduce a new benchmark dataset called ASL-Text that consists of 250 sign language classes and their accompanying textual descriptions. Compared to the ZSL datasets in other domains (such as object recognition), our dataset consists of limited number of training examples for a large number of classes, which imposes a significant challenge. We propose a framework that operates over the body and hand regions by means of 3D-CNNs, and models longer temporal relationships via bidirectional LSTMs. By leveraging the descriptive text embeddings along with these spatio-temporal representations within a zero-shot learning framework, we show that textual data can indeed be useful in uncovering sign languages. We anticipate that the introduced approach and the accompanying dataset will provide a basis for further exploration of this new zero-shot learning problem.
+    </p>
+    <table width="500" border="0" cellpadding="5" >
+    <tr>
+      <td align="center" valign="center" style="padding-left:150px">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/FehfBKrZchU"> </iframe>
+        <br />
+        <i> <font face="serif"> Move both <font color="red"> S </font> hands in alternating forward circles, palms facing down, in front of each side of the body.</font> </i>
+      </td>
+
+      <td align="center" valign="center">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/WotVv6vNAp4"> </iframe>
+        <br/>
+        <i> <font face="serif"> Bring the fingertips of the right flattened <font color="red">O</font> hand, palm facing in, to the lips with a repeated movement. </font> </i>
+        <br/>
+      </td>
+      <td align="center" valign="center">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/nQOC23SZL3Q"> </iframe>
+        <br/>
+        <i> <font face="serif"> With the right index finger extended up, move the right hand, palm facing back, in a small repeated circle in front of the right shoulder. </font> </i>
+      </td>
+      <br/>
+    </tr>
+    <tr>
+      <td align="center" valign="center"  style="padding-left:150px" >
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/071dPwrGGBI"> </iframe>
+        <br />
+        <i> <font face="serif"> Beginning with the fingertips of both <font color="red">F</font> hands touching in front of the chest, palms facing each other, bring the hands away from each other in outward arcs while turning the palms in, ending with the little fingers touching. </font> </i>
+        <br/><br/>
+      </td>
+      <td align="center" valign="center">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/GKSB5OocRR8"> </iframe>
+        <br/>
+        <i> <font face="serif"> Beginning with the bent thumb and middle finger of the right <font color="red"> 5 </font> hand touching the chest, palm facing in, bring the hand forward while closing the fingers to form an <font color="red">8</font> hand. </font></i>
+        </br></br></br>
+      </td>
+      <td align="center" valign="center">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/SXB0jDb9IfA">  </iframe>
+        <br/>
+        <i> <font face="serif"> Strike the knuckles of the right <font color="red">A</font> hand, palm facing in, against the extended left index finger held up in front of the chest, palm facing right. </font>
+        </i>
+        <br/><br/><br/><br/>
+      </td>
+      <br/>
+    </tr>
+  </table>
+    <br/>
+    <b> Study </b> </br>
+    <ul>
+      <li> Paper : <a href="https://arxiv.org/pdf/1907.10292.pdf" target="_blank"> PDF</a> </li>
+      <li> Dataset : <a href="https://drive.google.com/uc?id=1P6D93tpP7glfxZmVJjYoaFbXbl1EAufU&export=download" style="color:#008080"> Zip File </a> </li>
+    </ul>
+    Please consider citing if you make use of this work and/or the dataset: </br>
+    <pre style="display: block; background-color:#F8F9F9;" tab-width:4>
+      @inproceedings{bilge19zsslr,
+      author = {Bilge, Yunus Can and Ikizler-Cinbis, Nazli and Cinbis, Ramazan Gokberk},
+      title =  {Zero-Shot Sign Language Recognition: Can Textual Data Uncover Sign Languages?},
+      booktitle = {Proceedings of the British Machine Vision Conference ({BMVC})},
+      year = {2019}
+}
+    </pre>
+    <!-- add bibtex -->
+    
+    
+
+
+    </br>
+    <a href="https://medium.com/h%C3%BC-bilgisayar-m%C3%BChendisli%C4%9Fi/i%CC%87%C5%9Faret-dili-s%C3%B6zl%C3%BCkleri-i%CC%87%C5%9Faret-dillerini-tan%C4%B1mada-kullan%C4%B1labilir-mi-28ffe70713d3" target="_blank">A medium post in Turkish language is available for the study</a>
+    
+      
+  </br>
+    
+    <hr>
+    
+    </br>
+    <a href="index.html"> Back to Home</a> 
+    </div>
+  </body>
+
+</html>

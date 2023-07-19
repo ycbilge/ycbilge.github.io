@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Project page for Towards Zero-shot Sign Language Recognition</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+    .text {
+      float:top;
+    }
+</style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <ul>
+          <li><a href="https://ycbilge.github.io">Download <strong>Code</strong></a></li>
+          <li><a href="https://ycbilge.github.io">Download <strong>Dataset</strong></a></li>
+        </ul>
+      </header>
+<section>        
+        <h1>Towards Zero-shot Sign Languge Recognition</h1>
+        <h4>
+          <a href="index.html" target="_blank"> Yunus Can Bilge</a> &nbsp;
+          <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp;
+          <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp;
+        </h4>
+        <br>
+        <p>The paper tackles the problem of zero-shot sign language recognition (ZSSLR), 
+          where the goal is to leverage models learned over the seen sign classes to recognize the instances of unseen sign classes. 
+          In this context, readily available textual sign descriptions and attributes collected from sign language dictionaries are 
+          utilized as semantic class representations for knowledge transfer. For this novel problem setup,   
+        <ul>
+          <li> (i) We introduce three benchmark datasets with their accompanying textual and attribute descriptions to analyze the problem in detail.
+          <li> (ii) Our proposed approach builds spatio-temporal models of body and hand regions. 
+          <li> (ii) By leveraging the descriptive text and attribute embeddings along with these visual representations within a zero-shot learning framework, we show that textual and attribute based class definitions can provide effective knowledge for the recognition of previously unseen sign classes. 
+          <li> (iii) By leveraging the descriptive text and attribute embeddings along with these visual representations within a zero-shot learning framework, we show that textual and attribute based class definitions can provide effective knowledge for the recognition of previously unseen sign classes. 
+          <li> (iv) We additionally introduce techniques to analyze the influence of binary attributes in correct and incorrect zero-shot predictions.
+        </ul>
+  
+        We anticipate that the introduced approaches and the accompanying datasets will provide a basis for further exploration of zero-shot learning in sign language recognition.
+        </p>
+        <h2> Dataset Samples for the ASL-Text and MS-ZSSLR-W/C </h2>
+
+        <b>BICYLE</b> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp;<b>EAT</b>&emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; <b>ALONE</b>&emsp; &emsp;&emsp; &emsp;&emsp;&emsp; &emsp; &emsp;&emsp; &emsp;<b>LIBRARY</b> 
+        <div id="videoal">
+          
+  		    <img src="images/bicycle_240.gif" width=200 height=150>
+          <img src="images/eat_240.gif" width=200 height=150>
+  		    <img src="images/alone_240.gif" width=200 height=150>
+          <img src="images/library_240.gif" width=200 height=150>
+  		    <br>
+          <br>
+         </div>
+        <div class="text">
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">Move both <font color="red">S</font> hands in  alternating forward circles, palms facing down, in front  of each side of the body.</p>&emsp; &emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">Bring the fingertips of the right flattened  <font color="red">O</font> hand, palm  facing in, to the  lips with a repeated movement.</p> &emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">With the right index finger extended up, move the right hand, palm facing back, in a small repeated circle in front of the right shoulder.</p> &emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">Move the right <font color="red">L</font> hand, palm facing forward, in a circle in front of the right shoulder.</p>
+         
+      </div>
+      <br> 
+       <b>BOOK</b> &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; &emsp;<b>HORSE</b>&emsp; &emsp;&emsp; &emsp; &emsp; &emsp;&emsp; &emsp; &emsp;&emsp; &emsp; <b>ORANGE</b>&emsp; &emsp;&emsp; &emsp;&emsp;&emsp; &emsp; &emsp;&emsp; &emsp;<b>FISH</b> 
+       <div id="videoal">
+          <img src="images/book_240.gif" width=200 height=150>
+          <img src="images/horse_240.gif" width=200 height=150>
+          <img src="images/orange_240.gif" width=200 height=150>
+          <img src="images/fish_240.gif" width=200 height=150>        
+          <br>
+          <br>  
+             
+       	</div>
+      <div class="text">
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">Beginning with the palms of both open hands together in front of the chest, fingers angled forward, bring the hands apart at the top while keeping the little fingers together.</p>&emsp; &emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">With the extended thumb of the right <font color="red">U</font> hand against the right side of the forehead, palm facing forward, bend the fingers of the U hand up and down with a double movement.</p>&emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">Beginning with the right <font color="red">C</font> hand in front of the mouth, palm facing left, squeeze the fingers open and closed with a repeated movement, forming an S hand each time.</p>&emsp;
+          <p style="display: inline-block;word-wrap: break-word;width: 180px;height: 100px;">While touching the wrist of the right open hand, palm facing left, with the extended left index finger, swing the right hand back and forth with a double movement.</p>
+         
+        </div>
+        <h2>Citation</h2>
+
+        <p>Please cite if you make use of this work and/or the dataset:</p>
+        <pre style="font-size: 11px">
+        <code>
+          @inproceedings{bilge-cinbis22zsslr,
+            author = {Bilge, Yunus Can and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli},
+            title =  {Towards Zero-shot Sign Language Recognition},
+            booktitle = {IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)},
+            year = {2022}
+          }
+       </code>
+     </pre>
+        
+        <p>Based on the template by <a href="https://github.com/orderedlist/minimal/">Steve Smith</a>.</p>
+    
+    </section>
+           </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

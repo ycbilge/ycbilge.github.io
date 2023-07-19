@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title> Openpose on Centos 7 </title>
+</head>
+<body>
+<center>
+  <font color="red"> How to install Openpose on Centos 7</font>
+</center>
+<div>
+<ol>
+
+  <li> git clone <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">https://github.com/CMU-Perceptual-Computing-Lab/openpose</a></li>
+  <li> cd 3rdparty</li>
+  <li> git clone <a href="https://github.com/CMU-Perceptual-Computing-Lab/caffe.git">https://github.com/CMU-Perceptual-Computing-Lab/caffe.git</a></li>
+  <li> cd caffe</li>
+  <li> cp Makefile.config.Ubuntu14_cuda8.example Makefile.config</li>
+  <li> update blas choice by changing BLAS := open BLAS_INCLUDE := /usr/include/openblas/ BLAS_LIB := /usr/lib64/ </li>
+  <li> make all # in caffe dir </li>
+  <li> protoc sr/caffe/proto/caffe.proto -cpp_out=. # need to generate caffe.pb.h manually using protoc </li>
+  <li> mkdir include/caffe/proto # need to generate caffe.pb.h manually using protoc </li>
+  <li> mv src/caffe/proto/caffe.pb.h include/caffe/proto # need to generate caffe.pb.h manually using protoc </li>
+  <li> cmake -DCaffe_INCLUDE_DIRS=../3rdparty/caffe/include/ -DCaffe_LIBS=../3rdparty/caffe/build/lib/libcaffe.so -DBUILD_CAFFE=OFF .. </li>
+  <li> make -j[cpu count] </li>
+  <li> It should be fine now. The trick lies in compling caffe seperately </li>
+
+</ol> 
+
+<h1>References</h1>
+<ol>
+  <li> <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md">https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md</a></li>
+  <li> <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/423">https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/423</a></li>
+  <li> <a href="http://caffe.berkeleyvision.org/installation.html">http://caffe.berkeleyvision.org/installation.html</a></li>
+  <li> <a href="https://github.com/muupan/dqn-in-the-caffe/issues/3">https://github.com/muupan/dqn-in-the-caffe/issues/3</a></li>
+  <li> <a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/18">https://github.com/CMU-Perceptual-Computing-Lab/openpose/issues/18</a></li>
+</ol> 
+<a href="index.html"> Back to Home</a> 
+</div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Project page for Red Carpet to Fight Club</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <ul>
+          <li><a href="https://arxiv.org/abs/2009.07576">Download <strong>Paper</strong></a></li> 
+          <li><a href="https://forms.gle/W3HpNFMWRDQvVDcw9">Download <strong>Dataset</strong></a></li>
+        </ul>
+      </header>
+<section>        
+        <h1>Red Carpet to Fight Club: <br/>Partially-supervised Domain Transfer for Face Recognition in Violent Videos</h1>
+        <h4>
+          <a href="index.html" target="_blank"> Yunus Can Bilge<sup>&#9733;</sup></a> &nbsp;
+          <a href="https://www.linkedin.com/in/meyucel/" target="_blank"> Mehmet Kerim Yucel<sup>&#9733;</sup></a> &nbsp;
+          <a href="http://user.ceng.metu.edu.tr/~gcinbis" target="_blank"> R. Gokberk Cinbis</a> &nbsp;
+          <a href="https://web.cs.hacettepe.edu.tr/~nazli" target="_blank"> Nazli Ikizler-Cinbis</a> &nbsp;
+          <a href="https://web.cs.hacettepe.edu.tr/~pinar" target="_blank"> Pinar Duygulu</a>
+        </h4>
+        <br>
+        
+        <!-- <p><em>View the <a href="http://github.github.com/github-flavored-markdown/sample_content.html">source of this content</a>.</em></p> -->
+        <p><img src="images/transfer.gif" > </p>
+
+        <p>In many real-world problems, there is typically a large discrepancy between the characteristics of data used in training versus deployment. A prime example is the analysis of aggression videos: in a criminal incidence, typically suspects need to be identified based on their clean portrait-like photos, instead of their prior video recordings. This results in three major challenges; large domain discrepancy between violence videos and ID-photos, the lack of video examples for most individuals and limited training data availability. To mimic such scenarios, we formulate a realistic domain-transfer problem, where the goal is to transfer the recognition model trained on clean posed images to the target domain of violent videos, where training videos are available only for a subset of subjects. To this end, we introduce the "WildestFaces" dataset, tailored to study cross-domain recognition under a variety of adverse conditions. We divide the task of transferring a recognition model from the domain of clean images to the violent videos into two sub-problems and tackle them using
+        <ul>
+          <li> (i) stacked affine-transforms for classifier-transfer,
+          <li> (ii) attention-driven pooling for temporal-adaptation.
+        </ul>
+        We additionally formulate a self-attention based model for domain-transfer. We establish a rigorous evaluation protocol for this "clean-to-violent" recognition task, and present a detailed analysis of the proposed dataset and the methods. Our experiments highlight the unique challenges introduced by the WildestFaces dataset and the advantages of the proposed approach.
+        </p>
+
+
+        <h2>WildestFaces Dataset Samples</h2>
+
+
+        <div id="videoal">
+  		  <img src="images/ex1.gif" width=200 height=150>
+          <img src="images/output5_.gif" width=200 height=150>
+  		  <img src="images/output10.gif" width=200 height=150>
+           <img src="images/output11.gif" width=200 height=150>
+  		   <br>
+                <br>
+                  <img src="images/output8.gif" width=200 height=150>
+                  <img src="images/output18.gif" width=200 height=150>
+                  <img src="images/output19.gif" width=200 height=150>
+                  <img src="images/output29.gif" width=200 height=150>
+                  
+              <br>
+              <br>  
+       	</div>
+
+
+        <h2>Citation</h2>
+
+        <p>Please cite if you make use of this work and/or the dataset:</p>
+        <pre style="font-size: 11px">
+        <code>
+          @inproceedings{wildestFaces21,
+            author = {Bilge, Yunus Can and Yucel, Mehmet Kerim and Cinbis, Ramazan Gokberk and Ikizler-Cinbis, Nazli and Duygulu, Pinar},
+            title =  {Red Carpet to Fight Club: Partially-supervised Domain Transfer for Face Recognition in Violent Videos},
+            booktitle = {WACV},
+            year = {2021}
+          }
+       </code>
+     </pre>
+
+        <p><sup>&#9733;</sup> indicates equal contribution. </p>
+        <br><br><br><br>
+        <p>Based on the template by <a href="https://github.com/orderedlist/minimal/">Steve Smith</a>.</p>
+    
+    </section>
+           </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
