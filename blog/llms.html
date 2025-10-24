@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Speaking with Machines: Examining Large Language Models</title>
+
+  <meta name="description" content="A compact, research-grounded walkthrough of how large language models (LLMs) learn, adapt, and collaborate with humans—covering architecture, retrieval, evaluation, safety, and co-creation." />
+  <meta name="keywords" content="LLM, Large Language Models, Transformer, GPT, GPT-OSS, LoRA, QLoRA, Mixture-of-Experts, Attention, RAG, Tool Use, Agents, AI Evaluation, RLHF, DPO, Prompt Engineering, AI Safety, Anthropic, Radiology AI, Co-creation, Yunus Can Bilge" />
+  <meta name="author" content="Yunus Can Bilge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Speaking with Machines: Examining Large Language Models" />
+  <meta property="og:description" content="Machines now finish our sentences and write our stories. Their impact lies less in what they create than what they reveal. A structured guide to how LLMs work and how to work with them." />
+  <meta property="og:image" content="https:///ycbilge.github.io/blog/images/intro.jpg" />
+  <meta property="og:url" content="https://ycbilge.github.io/blog/llms.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="When Language Becomes Code: Dissecting an LLM" />
+  <meta name="twitter:description" content="An explanation of LLMs training, retrieval, adaptation, evaluation, safety, and a call to collaborate with AI thoughtfully." />
+  <meta name="twitter:image" content="https:///ycbilge.github.io/blog/images/intro.jpg" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ycbilge.github.io/blog/llms.html" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "When Language Becomes Code: Dissecting an LLM",
+    "alternativeHeadline": "When Language Becomes Code: Understanding How Large Language Models Think",
+    "description": "A compact, research grounded walkthrough of how large language models (LLMs) learn, adapt, and collaborate with humans—covering architecture, retrieval, evaluation, safety, and co-creation.",
+    "author": { "@type": "Person", "name": "Yunus Can Bilge" },
+    "datePublished": "2025-10-23",
+    "image": "https:///ycbilge.github.io/blog/images/intro.jpg",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ycbilge.github.io/blog/llms.html" },
+    "publisher": { "@type": "Organization", "name": "Yunus Can Bilge" }
+  }
+  </script>
+
+  <!-- Consent Mode v2: default denied -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      'wait_for_update': 2000
+    });
+  </script>
+
+  <!-- GA4 (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KTMJRTH94"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-9KTMJRTH94', { anonymize_ip: true, send_page_view: false });
+  </script>
+
+  <!-- Fonts / Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fdfdfd;
+      color: #1a1a1a;
+      margin: 0; padding: 0;
+      font-size: 13.5px; line-height: 1.6;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 1.2em 0;
+      text-align: center;
+      font-size: 1.3em; font-weight: 500; color: #111;
+    }
+    .container { padding: 2em 1em; max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.4em; margin: 0 0 .8em; font-weight: 600; text-align: center; }
+    h2 { font-size: 1.05em; margin: 1.4em 0 .6em; font-weight: 600;}
+    h3 { font-size: 1.0em; margin: 1.2em 0 .5em; font-weight: 600; }
+    p { margin: 0 0 1.2em; }
+    ul { padding-left: 1.2em; margin: .6em 0 1.5em; }
+    a { color: #0b65c2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer {
+      text-align: center; padding: 2em 1em;
+      font-size: 0.8em; color: #777;
+      border-top: 1px solid #e0e0e0; margin-top: 3em;
+    }
+    :target { scroll-margin-top: 80px; }
+
+    /* Cookie banner */
+    .cookie-banner {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      z-index: 9999; background: rgba(0,0,0,.85); color: #fff;
+      padding: 14px 16px; display: none;
+    }
+    .cookie-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .cookie-text { font-size: 13px; line-height: 1.5; flex: 1 1 540px; }
+    .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .btn { border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .btn-accept { background: #22a745; color: #fff; }
+    .btn-decline { background: #555; color: #fff; }
+  </style>
+</head>
+<body>
+  <header>Speaking with Machines: Examining Large Language Models</header>
+  <div class="container">
+
+    <img src="intro.jpg" alt="concept illustration" loading="lazy"/>
+
+
+    <p>
+      <a href="https://github.com/karpathy/nanochat" target="_blank"> Machines </a> now finish our sentences and write our stories. Yet their real impact lies not in what they create, but in what they reveal. The question is no longer whether <i>machines can create</i>, but rather <i>what they are truly capable of doing</i>; if we understand that, the next question becomes: how should we work with it? Let's start with dissecting how these models are developed first.
+
+    </p>
+
+    <h2 id="models">AI does not <i>know</i>; it models.</h2>
+    <p>
+      Modern large language models (LLMs) utilize <a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf" target="_blank">transformer</a> architectures, they optimize billions of parameters by <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation" target="_blank"> maximizing the likelihood of observed text learning </a> via next-token prediction. Its goal is simple: predict the next word. Given <em> The sky is,</em> it might assign high probability to <em>blue </em>, lower to <em>clear </em>, and nearly zero to <em>banana </em>. In the training, all text is translated into a numerical form. LLMs can’t process words directly, so data is tokenized, split into subwords such as <a href="https://huggingface.co/learn/llm-course/en/chapter6/5" target="_blank">  Byte Pair Encoding </a>. Each token is mapped to a vector embedding, capturing its meaning and context. When training starts, attention mechanisms use these vectors to calculate relationships among all words, building rich contextual representations.  What emerges is at the end is a <a href="https://en.wikipedia.org/wiki/Foundation_model" target="_blank"> foundation model </a>, a vast probabilistic engine of language. </p> 
+      To this end, they are modeling grammar, semantics, and reasoning as probability patterns.
+    </p>
+
+    <h2 id="architecture">Inside the black box lies a network of attention.</h2> The landscape of large language models has diversified across several architectural. Recent examples include
+<a href="https://arxiv.org/abs/2412.19437" target="_blank"><em>DeepSeek-V3</em></a> (sparse MoE with Multi-Head Latent Attention), <a href="https://arxiv.org/abs/2501.00656" target="_blank"><em>OLMo 2</em></a> (open dense decoder with full training artifacts), 
+<a href="https://arxiv.org/abs/2503.19786" target="_blank"><em>Gemma 3</em></a> (lightweight multimodal long-context family), 
+<a href="https://mistral.ai/news/mistral-small-3-1" target="_blank"><em>Mistral Small 3.1</em></a> (compact decoder with grouped-query attention and sliding-window caching), 
+<a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank"><em>Llama 4</em></a> (dense transformer with extended context and inference-efficient routing), 
+<a href="https://huggingface.co/collections/Qwen/qwen3" target="_blank"><em>Qwen 3</em></a> (bilingual general-purpose family leveraging rotary embeddings), 
+<a href="https://arxiv.org/abs/2501.12599" target="_blank"><em>Kimi K2</em></a> (long-context transformer emphasizing reasoning under memory constraints), 
+<a href="https://huggingface.co/openai/gpt-oss-120b" target="_blank"><em>GPT-OSS</em></a> (OpenAI’s open-source variant), 
+<a href="https://huggingface.co/xai-org/grok-2" target="_blank"><em>Grok 2.5</em></a> (social-alignment-tuned model integrating multi-turn memory and reasoning heuristics), 
+<a href="https://huggingface.co/collections/Qwen/qwen3" target="_blank"><em>Qwen 3-Next</em></a> (a next-generation variant emphasizing larger context and reduced inference cost). These architectures illustrate a shift toward modularity, longer context, and reasoning-efficient scaling
+
+    </p>
+
+        <img src="horses.jpg" alt="concept illustration" loading="lazy"/>
+
+
+    <h2 id="training">Training teaches patterns; post-training teaches purpose.</h2>
+    <p>
+      Pretraining gives linguistic priors; supervised fine-tuning and preference learning shape behavior. This is followed by a third optimization layer: <em>reinforcement learning (RL)</em>, to optimize not only model parameters but also the <em>sampling loop</em> itself. Through methods such as Reinforcement Learning from Human Feedback (RLHF) or its variants, the model learns to prefer responses that align with desired. Once RL aligns a model’s behavior with human intent, the next challenge becomes guiding that behavior interactively, <em>without retraining</em>. This is where <strong>prompting</strong> enters the picture. 
+      <p> A prompt acts as a lightweight control signal, conditioning the model’s internal distribution toward a desired region of its learned space. In statistical terms, prompting performs <em>Bayesian inference</em> on top of the model’s priors: given context, and it samples the most probable continuation. Every instruction, role, or constraint we provide effectively reshapes the posterior belief the model uses to generate its next token. </p>
+
+    <p> Yet prompts, while powerful, they adjust context but not the underlying parameters. For more improved adaptation, we rely on <em>parameter-efficient fine-tuning</em>, techniques that modify only a small subset of the model’s weights while preserving the foundation model’s knowledge. Approaches such as <a href="https://arxiv.org/abs/2106.09685" target="_blank"><em>LoRA</em></a> and its low-bit variant <a href="https://arxiv.org/abs/2305.14314" target="_blank"><em>QLoRA</em></a> fine-tune compact adapter matrices rather than full layers. The next natural question emerges, <em>how do we evaluate what has truly been learned, and whether adaptation leads to genuine understanding or just imitation?</em>
+    </p>
+
+
+
+
+
+    <h2 id="evaluation">Evaluation defines trust.</h2>
+    <p>
+
+      We mainly rely on four major evaluation pathways; benchmark multiple-choice, free-form testing, preferences and leaderboard systems, and LLM-as-judge frameworks (<a href="https://magazine.sebastianraschka.com/p/llm-evaluation-4-approaches" target="_blank">Raschka, 2025</a>), each with distinct strengths and trade-offs, and together forming the backbone of trust in deployed LLMs. </p> From the field, two pragmatic perspectives emerge. First, the evaluation’s role in building trust: humans must retain control, augmentation beats replacement, tasks must fit the technology, AI should generate possibilities not answers, solve genuine human problems and collaborate creatively (<a href="https://www.newsweek.com/2025/07/04/ai-impact-six-lessons-2088669.html" target="_blank"> Newsweek, 2025</a>).
+    <p> Second, in healthcare—an industry, “AI isn't replacing radiologists” shows that even when models outperform humans on benchmarks, their real-world impact remains limited by context, regulation and workflow integration (<a href="https://www.worksinprogress.news/p/why-ai-isnt-replacing-radiologists" target="_blank">Mousa, 2025</a>). 
+  </p>
+
+
+    <h2 id="rag">How do models “know” fresh facts?</h2>
+    <p>
+      Most production systems pair LLMs with retrieval-augmented generation (RAG), tool use, and sometimes agent loops. The model plans over tools—search, databases, function calls, then verifies and summarizes results. 
+    </p>
+
+
+
+    <img src="paths.png" alt="concept illustration" loading="lazy"/>
+
+    <h2 id="safety">Hallucination, Misalignment, and Misuse in AI</h2>
+    <p>
+Despite their fluency, LLMs are trained to rarely admit ignorance, and that sets the stage for what is commonly called <em>hallucination</em>. Instead of signaling uncertainty, these systems often fill gaps with statistically plausible but false information. As <a href="https://www.anthropic.com/research/agentic-misalignment" target="_blank">Anthropic</a> notes, this behavior stems partly from <em>agentic misalignment</em>: models optimized under conflicting objectives may prioritize maintaining coherence or “appearing right” over factual accuracy. Such tendencies mirror self-preserving behavior.
+</p>
+
+<p>
+The risks of these tendencies become more visible when deployed without critical oversight. In academia, the <a href="https://openletter.earth/open-letter-stop-the-uncritical-adoption-of-ai-technologies-in-academia-b65bba1e" target="_blank">Open Letter</a> warns that integrating these systems too hastily risks normalizing unverified output and weakening human judgment. And in society at large, unintended misuse has real consequences: in one alarming case, a 13-year-old boy’s classroom interaction with an AI system triggered an automated safety response and led to his arrest. (<a href="https://economictimes.indiatimes.com/magazines/panache/13-year-old-boy-asks-chatgpt-a-chilling-question-during-class-minutes-later-ai-alert-gets-him-arrested/articleshow/124335977.cms" target="_blank">Economic Times</a>).
+</p>
+
+    <h2 id="cocreation">Creation becomes collaboration when humans stay in the loop.</h2>
+    <p>
+      The study <a href="https://www.sciencedirect.com/science/article/pii/S2949882124000161" target="_blank"> <em>Co-creating Art with Generative AI</em> (2024) </a> finds authorship shifting from solitary making to <em>dialogue</em>: artists drive, critique, and curate as models produce variations. In engineering, <a href="https://blog.nilenso.com/blog/2025/05/29/ai-assisted-coding/" target="_blank">Nilenso</a> shows AI is a multiplier that rewards clear specs, process, and review; clarity in, clarity out.
+    </p>
+
+    <h2 id="conclusion">Conclusion: Understanding Before Building</h2>
+<p>
+As we examine how LLMs learn, and adapt. To work with AI responsibly, we must treat it neither as an oracle nor a threat, but as a collaborator whose strength depends on our guidance.
+</p>
+
+   
+    <p style="text-align:right;"><strong>Yunus Can Bilge</strong>, October 2025</p>
+  </div>
+
+  <footer>
+    &copy; Yunus Can Bilge &middot; Speaking with Machines: Examining Large Language Models
+  </footer>
+
+  <!-- Cookie / Consent Banner -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        Bu sitede deneyiminizi geliştirmek ve istatistiksel analiz yapmak için çerezler kullanıyoruz.
+        <a href="/privacy" style="color:#9ecbff" target="_blank" rel="noopener">Gizlilik Politikası</a>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-decline" id="btnDecline">Reddet</button>
+        <button class="btn btn-accept" id="btnAccept">Kabul Et</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- UTM capture (session-based) ---
+    (function captureUTM() {
+      var params = new URLSearchParams(window.location.search);
+      var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+      utmKeys.forEach(function(k){
+        var v = params.get(k);
+        if (v) sessionStorage.setItem(k, v);
+      });
+      if (document.referrer) sessionStorage.setItem('referrer', document.referrer);
+    })();
+
+    // --- Cookie banner & Consent Mode control ---
+    (function consentManager(){
+      var banner = document.getElementById('cookieBanner');
+      var acceptBtn = document.getElementById('btnAccept');
+      var declineBtn = document.getElementById('btnDecline');
+      var KEY = 'cookieConsent'; // 'granted' | 'denied'
+
+      function hideBanner(){ banner.style.display = 'none'; }
+      function showBanner(){ banner.style.display = 'block'; }
+
+      function grantAnalytics() {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        gtag('event', 'page_view', {
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          page_title: document.title
+        });
+      }
+      function denyAnalytics() {
+        gtag('consent', 'update', { 'analytics_storage': 'denied' });
+      }
+
+      var saved = localStorage.getItem(KEY);
+      if (!saved) showBanner();
+      else { if (saved === 'granted') grantAnalytics(); else denyAnalytics(); }
+
+      acceptBtn.addEventListener('click', function(){
+        localStorage.setItem(KEY, 'granted'); grantAnalytics(); hideBanner();
+      });
+      declineBtn.addEventListener('click', function(){
+        localStorage.setItem(KEY, 'denied');  denyAnalytics();  hideBanner();
+      });
+    })();
+  </script>
+</body>
+</html>
