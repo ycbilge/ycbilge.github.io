@@ -44,18 +44,7 @@
   }
   </script>
 
-  <!-- Consent Mode v2: default denied -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'analytics_storage': 'denied',
-      'functionality_storage': 'granted',
-      'security_storage': 'granted',
-      'wait_for_update': 2000
-    });
-  </script>
+ 
 
  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KTMJRTH94"></script>
@@ -64,7 +53,11 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-9KTMJRTH94');
+  gtag('config', 'G-9KTMJRTH94', {
+    anonymize_ip: true,
+    allow_ad_personalization_signals: false,
+    allow_google_signals: false
+  });
 </script>
 
   <!-- Fonts / Styles -->
@@ -99,18 +92,7 @@
     }
     :target { scroll-margin-top: 80px; }
 
-    /* Cookie banner */
-    .cookie-banner {
-      position: fixed; left: 0; right: 0; bottom: 0;
-      z-index: 9999; background: rgba(0,0,0,.85); color: #fff;
-      padding: 14px 16px; display: none;
-    }
-    .cookie-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-    .cookie-text { font-size: 13px; line-height: 1.5; flex: 1 1 540px; }
-    .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
-    .btn { border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
-    .btn-accept { background: #22a745; color: #fff; }
-    .btn-decline { background: #555; color: #fff; }
+    
   </style>
 </head>
 <body>
@@ -195,27 +177,16 @@ The risks of these tendencies become more visible when deployed without critical
 As we examine how LLMs learn, and adapt. To work with AI responsibly, we must treat it neither as an oracle nor a threat, but as a collaborator whose strength depends on our guidance.
 </p>
 
-   
+  <p style="text-align:center; font-size:0.85em; color:#777;">
+  This site uses Google Analytics with anonymized IPs for aggregated usage statistics.
+  <a href="/privacy" style="color:#0b65c2;">Learn more</a>
+</p>
     <p style="text-align:right;"><strong>Yunus Can Bilge</strong>, October 2025</p>
   </div>
 
   <footer>
     &copy; Yunus Can Bilge &middot; Speaking with Machines: Examining Large Language Models
   </footer>
-
-  <!-- Cookie / Consent Banner -->
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookie consent">
-    <div class="cookie-inner">
-      <div class="cookie-text">
-        Bu sitede deneyiminizi geliştirmek ve istatistiksel analiz yapmak için çerezler kullanıyoruz.
-        <a href="/privacy" style="color:#9ecbff" target="_blank" rel="noopener">Gizlilik Politikası</a>
-      </div>
-      <div class="cookie-actions">
-        <button class="btn btn-decline" id="btnDecline">Reddet</button>
-        <button class="btn btn-accept" id="btnAccept">Kabul Et</button>
-      </div>
-    </div>
-  </div>
 
   <script>
     // --- UTM capture (session-based) ---
