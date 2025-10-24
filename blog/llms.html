@@ -57,12 +57,15 @@
     });
   </script>
 
-  <!-- GA4 (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KTMJRTH94"></script>
-  <script>
-    gtag('js', new Date());
-    gtag('config', 'G-9KTMJRTH94', { anonymize_ip: true, send_page_view: false });
-  </script>
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9KTMJRTH94"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9KTMJRTH94');
+</script>
 
   <!-- Fonts / Styles -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
