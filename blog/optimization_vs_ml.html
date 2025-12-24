@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Learning to Optimize</title>
+<meta name="description" content="A technical exploration of how neural networks approximate NP-Hard optimization problems, bridging the gap between Operations Research (OR) and Deep Learning." />
+  <meta name="keywords" content="Learning to Optimize, Operations Research, Machine Learning, Mixed Integer Programming, Neural Networks, Gurobi, TSP, Combinatorial Optimization, Yunus Can Bilge" />
+  <meta name="author" content="Yunus Can Bilge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Learning to Optimize: What Happens When Algorithms Start Remembering?" />
+  <meta property="og:description" content="Can a neural network learn the algorithmic structure of an NP-Hard problem? A deep dive into bridging discrete solvers and continuous learners." />
+  <meta property="og:image" content="https://ycbilge.github.io/blog/images/skyline_grid.png" />
+  <meta property="og:url" content="https://ycbilge.github.io/blog/learning-to-optimize.html" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Learning to Optimize: What Happens When Algorithms Start Remembering?" />
+  <meta name="twitter:description" content="Can a neural network learn the algorithmic structure of an NP-Hard problem? A deep dive into bridging discrete solvers and continuous learners." />
+  <meta name="twitter:image" content="https://ycbilge.github.io/blog/images/skyline_grid.png" />
+
+  <link rel="canonical" href="https://ycbilge.github.io/blog/optimization_vs_ml.html" />
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KTMJRTH94"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9KTMJRTH94', {
+      anonymize_ip: true,
+      allow_ad_personalization_signals: false,
+      allow_google_signals: false
+      page_title: 'Learning to Optimize',
+    page_path: '/blog/optimization_vs_ml.html'
+
+    });
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #fdfdfd;
+      color: #1a1a1a;
+      margin: 0; padding: 0;
+      font-size: 15px; line-height: 1.7; /* Slightly increased for readability */
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 1.2em 0;
+      text-align: center;
+      font-size: 1.3em; font-weight: 500; color: #111;
+    }
+    .container { padding: 2em 1em; max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.8em; margin: 0 0 .8em; font-weight: 600; text-align: center; color: #2c3e50; }
+    h2 { font-size: 1.3em; margin: 1.8em 0 .8em; font-weight: 600; color: #2980b9; border-bottom: 1px solid #eee; padding-bottom: 8px;}
+    h3 { font-size: 1.1em; margin: 1.4em 0 .6em; font-weight: 600; color: #34495e; }
+    p { margin: 0 0 1.2em; }
+    ul { padding-left: 1.4em; margin: .6em 0 1.5em; }
+    li { margin-bottom: 0.5em; }
+    a { color: #0b65c2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    /* Table Styling */
+    table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; }
+    th, td { border: 1px solid #e0e0e0; padding: 10px; text-align: left; }
+    th { background-color: #f9f9f9; font-weight: 600; }
+
+    /* Callout/Blockquote Styling */
+    blockquote {
+        background: #f9f9f9;
+        border-left: 4px solid #2980b9;
+        margin: 1.5em 0;
+        padding: 1em;
+        font-style: italic;
+        color: #555;
+    }
+
+    footer {
+      text-align: center; padding: 2em 1em;
+      font-size: 0.8em; color: #777;
+      border-top: 1px solid #e0e0e0; margin-top: 3em;
+    }
+    :target { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body>
+</head>
+<body>
+  <header>Learning to Optimize</header>
+  <div class="container">
+    <h1>What Happens When Algorithms Start Remembering?</h1>
+     <img src="./images/skyline_grid.png" alt="concept illustration" loading="lazy" width="640" height="360"/>
+    <p>
+      Let’s start with a familiar story.
+      A <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem" target="_blank">TSP</a> instance appears.
+      a solver is invoked, and a solution is returned. End of episode.
+    </p>
+
+    <p>
+      Convenient? Yes. But, real optimization problems rarely arrive as isolated puzzles. They arrive as <em>families</em>.
+      A logistics company does not solve <a href="https://en.wikipedia.org/wiki/Vehicle_routing_problem" target="_blank"> the routing problem</a> once; it solves routing problems repeatedly,
+      under similar constraints, shaped by the same geography, fleets, and business rules. What changes is
+      the daily demand. What generally stays is the structure.
+    </p>
+
+    <p>
+      Once you take that seriously, a natural question follows:
+      if instances come from a <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables" target="_blank">distribution</a>, can we extract regularities from past solves and reuse them? Not to replace solvers, but to make them faster,
+      more predictable, and more scalable.
+    </p>
+
+    <p>
+      That’s where the conversation between between
+      <a href="https://en.wikipedia.org/wiki/Operations_research" target="_blank">Operations Research</a> and
+      <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">Machine Learning</a> becomes interesting.
+    </p>
+
+    <div class="callout">
+      <strong>This post is structured around three questions:</strong>
+      <ul>
+        <li><strong>Where</strong> does the OR–ML conversation come from?</li>
+        <li><strong>Why</strong> does it matter in practce?</li>
+        <li><strong>How</strong> do hybrid solver–learner systems reconcile it, and where do they fail?</li>
+      </ul>
+    </div>
+
+    
+
+    <p class="micro">
+      Before we talk about them, we need to see why optimization becomes difficult enough to justify learning in the first place.
+      So we start with complexity.
+    </p>
+
+    <img src="./images/rigid_to_fluid.png" alt="concept illustration" loading="lazy" width="640" height="360"/>
+
+    <h3>1) The Complexity Landscape: Why Heuristics Matter</h3>
+    <p>
+      To understand where learning might help, separate two regimes: problems with efficient algorithms,
+      and problems where exact methods face combinatorial explosion in the worst case.
+    </p>
+
+    <h3>The Easy Case (<a href="https://en.wikipedia.org/wiki/P_versus_NP_problem" target="_blank">\(P\)</a>): MST</h3>
+    <p>
+      The <a href="https://en.wikipedia.org/wiki/Minimum_spanning_tree" target="_blank">Minimum Spanning Tree</a> is a friendly problem.
+      It admits greedy algorithms with provable guarantees. For a graph \(G=(V,E)\),
+      <a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm" target="_blank">Kruskal’s algorithm</a>
+      builds the MST by repeatedly adding the cheapest edge that doesn’t form a cycle.
+
+      In such settings, learning is rarely justified on algorithmic grounds (though it may still help under system constraints).
+
+    </p>
+     <blockquote>
+    <p>
+      <strong>Verdict:</strong> learning is not needed to overcome worst-case complexity here.
+    </p>
+  </blockquote>
+
+
+    <h3>The Hard Case (<a href="https://en.wikipedia.org/wiki/NP-hardness" target="_blank">NP-hard</a> Optimization): <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem" target="_blank=">TSP</a></h3>
+    <p>
+      In TSP, a locally appealing step can be globally damaging. Exact methods must, in general,
+      navigate a search space that grows exponentially with \(n\) (though practical performance depends on structure and relaxations).
+
+      
+    </p>
+    
+
+    <blockquote>
+    <p>
+      <strong>Verdict:</strong> this is where learning is tempting: not because NP-hard implies “learnable,”
+      but because repeated, structured instances invite amortization.
+    </p>
+  </blockquote>
+
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Computational_complexity" target="_blank"> Complexity </a> explains why we want help. <a href="https://en.wikipedia.org/wiki/Convex_optimization" target="_blank"> Geometry </a> explains why help is hard.
+      OR and ML reason in different mathematical spaces.
+    </p>
+
+
+    <h3>2) The Classical View: Optimization as Geometry (OR’s World)</h3>
+   <p>
+      In <a href="https://en.wikipedia.org/wiki/Integer_programming" target="_blank"> mixed-integer programming (MIP) </a>, optimization is a search over a feasible region. A general constrained problem can be written as:
+    </p>
+
+    $$
+    \begin{aligned}
+    \min_{x} \quad & f(x) \\
+    \text{s.t.} \quad & g_i(x) \le 0, \quad i=1,\dots,m \\
+    & h_j(x) = 0, \quad j=1,\dots,k \\
+    & x \in \mathcal{X}
+    \end{aligned}
+    $$
+
+    <p>Where:</p>
+    <ul>
+      <li>\(x\): decision variables.</li>
+      <li>\(f(x)\): objective (cost).</li>
+      <li>\(g_i(x)\): inequality constraint functions defining feasibility boundaries.</li>
+    <li>\(h_j(x)\): equality constraint functions enforcing exact structural conditions.</li>
+      <li>\(\mathcal{X}\): domain, often \(\mathbb{Z}^n\)  (the set of n-dimensional integer vectors) for integer problems.</li>
+    </ul>
+
+
+    <h3>How Solvers (e.g., <a href="https://en.wikipedia.org/wiki/Gurobi_Optimizer" target="_blank">Gurobi</a>) Work</h3>
+    <p>
+      Modern solvers are best described as <em>branch-and-cut</em> systems (branch-and-bound plus cutting planes,
+      presolve, propagation, and primal heuristics). A simplified view:
+    </p>
+    <ul>
+      <li><strong>Relaxation:</strong> drop integrality (\(x \in \mathbb{R}^n\) instead of \(\mathbb{Z}^n\)) to get a lower bound (minimization).</li>
+      <li><strong>Cutting planes:</strong> add valid inequalities to tighten the relaxation toward \(\mathrm{conv}(X_I)\).</li>
+      <li><strong>Branching:</strong> split the search space to enforce integrality.</li>
+      <li><strong>Pruning:</strong> discard branches whose bound is worse than an incumbent feasible solution.</li>
+    </ul>
+
+    <blockquote>
+      <strong>Geometric goal (precise):</strong>
+      solvers tighten the <em>relaxation</em> toward the <a href="https://en.wikipedia.org/wiki/Convex_hull" target="_blank"> convex hull </a> of integer-feasible points (they do not “tighten the convex hull” itself),
+      because tighter relaxations reduce the search tree dramatically.
+    </blockquote>
+
+    <p class="micro">
+      So OR lives in a world of feasibility, and bounds.
+      Now what happens when ML walks into the room with gradients.
+    </p>
+
+    <h3>3) The Neural View: Optimization as Function Approximation (ML’s World)</h3>
+    <p>
+      In <a href="https://en.wikipedia.org/wiki/Deep_learning" target="_blank"> deep learning </a>, “optimization” usually means fitting parameters \(\theta\) of a function approximator.
+      We train \(F_\theta\) to map a problem representation \(s\) (e.g., city coordinates, costs, constraints) to an output \(y\).
+    </p>
+
+    $$
+      \min_{\theta}\ \mathbb{E}_{(s,y)\sim \mathcal{D}} \left[\mathcal{L}\!\left(F_\theta(s),\,y\right)\right]
+    $$
+
+    <p>
+      SGD updates parameters via:
+    </p>
+
+    $$
+      \theta_{t+1} = \theta_t - \eta \nabla_\theta \mathcal{L}(\theta_t),
+    $$
+
+    <p>
+This update follows from first-order optimization: a gradient descent step that locally
+linearizes the loss and moves parameters in the direction of steepest decrease.
+</p>
+    <p>
+      <p>Where:</p>
+<ul>
+  <li>\(\theta\): model parameters.</li>
+  <li>\(F_\theta\): parametric model (e.g., a neural network).</li>
+  <li>\((s, y)\sim \mathcal{D}\): data samples drawn from the training distribution.</li>
+  <li>\(\mathcal{L}(\cdot,\cdot)\): loss function.</li>
+  <li>\(\eta\): learning rate.</li>
+</ul>
+    </p>
+
+    <blockquote>
+    <p>
+      <strong>Core distinction:</strong> OR optimizes \(x\) for one instance; ML optimizes \(\theta\) to produce good \(x\)'s across many instances.
+    </p>
+  </blockquote>
+
+   
+
+   <h3>Bridging the Gap: Learning from a Solver (<a href="https://en.wikipedia.org/wiki/Imitation_learning" target="_blank"> Imitation Learning</a>)</h3>
+    <p>
+      One practical route is to treat the solver as a teacher.
+      You generate labeled data by solving instances (possibly under time limits), then train a model to imitate
+      either the final solution or intermediate decisions.
+    </p>
+
+    <h3>Strategy: Behavior Cloning</h3>
+   <p>
+If the output is a binary decision (e.g., “open facility \(i\)?” in a
+<a href="https://en.wikipedia.org/wiki/Facility_location_problem" target="_blank">
+facility location problem
+</a>), a common loss is
+<a href="https://en.wikipedia.org/wiki/Cross_entropy" target="_blank">
+binary cross entropy
+</a>:
+</p>
+
+$$
+\mathcal{L}(\theta) = - \frac{1}{N}\sum_{i=1}^{N}
+\left[
+y_i \log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)
+\right]
+$$
+
+<p>Where:</p>
+<ul>
+  <li>\(y_i \in \{0,1\}\): solver’s binary decision (e.g., open / closed).</li>
+  <li>\(\hat{y}_i \in [0,1]\): model-predicted probability.</li>
+  <li>\(N\): number of decision variables or training samples.</li>
+  <li>\(\theta\): model parameters.</li>
+</ul>
+
+    <div class="callout">
+      <strong>Important caveat:</strong>
+      imitation may fail under distribution shift, and sequential decision imitation can accumulate errors.
+    </div>
+
+    <h3>The Solution: Hybrid Solver–Learner Systems (augmentation, not replacement)</h3>
+    <p>
+      Because feasibility and optimality guarantees remain difficult for learned models, the industrial standard is augmentation: the model proposes guidance, and the solver enforces correctness. In practice, learning accelerates search while classical optimization preserves feasibility and proofs.
+    </p>
+
+    <h3>Limitations (What can go wrong, even when the idea is right)</h3>
+    <ul>
+      <li><strong>Distribution shift:</strong> training on one geography/size/constraint set can fail on another; failures can be silent.</li>
+      <li><strong>Label cost:</strong> generating “optimal” labels can be expensive; many pipelines rely on time-limited solves and noisy supervision.</li>
+      <li><strong>Baselines are strong:</strong> approximation algorithms and classical heuristics can be hard to beat; comparisons must be fair.</li>
+    </ul>
+
+    <h2>Conclusion: A Shared Vocabulary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>Operations Research (OR)</th>
+          <th>Machine Learning (ML)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Goal</strong></td>
+          <td>Find optimal \(x\) for one instance</td>
+          <td>Find \(\theta\) that works across a distribution</td>
+        </tr>
+        <tr>
+          <td><strong>Method</strong></td>
+          <td>Branch-and-cut, presolve, cutting planes</td>
+          <td>SGD/Adam; learned scoring/proposals</td>
+        </tr>
+        <tr>
+          <td><strong>Search space</strong></td>
+          <td>Discrete / combinatorial</td>
+          <td>Continuous / differentiable</td>
+        </tr>
+        <tr>
+          <td><strong>Guarantee</strong></td>
+          <td>Feasibility; optimality certificate (if solved)</td>
+          <td>Empirical performance; limited guarantees without strong assumptions</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      We are not “teaching networks to solve NP-hardness.” We are teaching them to be useful where solvers are expensive:
+      to propose good candidates, to guide search, and to accelerate repeated decision-making; while keeping correctness in the loop.
+    </p>
+
+<p style="text-align:right;"><strong>Yunus Can Bilge</strong>, December 2025</p>
+
+
+  <script>
+    // --- UTM capture (session-based) ---
+    (function captureUTM() {
+      var params = new URLSearchParams(window.location.search);
+      var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+      utmKeys.forEach(function(k){
+        var v = params.get(k);
+        if (v) sessionStorage.setItem(k, v);
+      });
+      if (document.referrer) sessionStorage.setItem('referrer', document.referrer);
+    })();
+
+    // --- Cookie banner & Consent Mode control ---
+    (function consentManager(){
+      var banner = document.getElementById('cookieBanner');
+      var acceptBtn = document.getElementById('btnAccept');
+      var declineBtn = document.getElementById('btnDecline');
+      var KEY = 'cookieConsent'; // 'granted' | 'denied'
+
+      function hideBanner(){ banner.style.display = 'none'; }
+      function showBanner(){ banner.style.display = 'block'; }
+
+      function grantAnalytics() {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        gtag('event', 'page_view', {
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          page_title: document.title
+        });
+      }
+      function denyAnalytics() {
+        gtag('consent', 'update', { 'analytics_storage': 'denied' });
+      }
+
+      var saved = localStorage.getItem(KEY);
+      if (!saved) showBanner();
+      else { if (saved === 'granted') grantAnalytics(); else denyAnalytics(); }
+
+      acceptBtn.addEventListener('click', function(){
+        localStorage.setItem(KEY, 'granted'); grantAnalytics(); hideBanner();
+      });
+      declineBtn.addEventListener('click', function(){
+        localStorage.setItem(KEY, 'denied');  denyAnalytics();  hideBanner();
+      });
+    })();
+  </script>
+</body>
+</html> 
