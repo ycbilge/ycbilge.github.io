@@ -281,7 +281,7 @@ linearizes the loss and moves parameters in the direction of steepest decrease.
       You generate labeled data by solving instances (possibly under time limits), then train a model to imitate
       either the final solution or intermediate decisions.
     </p>
-
+    
     <h3>Strategy: Behavior Cloning</h3>
    <p>
 If the output is a binary decision (e.g., “open facility \(i\)?” in a
@@ -312,7 +312,7 @@ $$
       <strong>Important caveat:</strong>
       imitation may fail under distribution shift, and sequential decision imitation can accumulate errors.
     </div>
-
+    <img src="./images/human_ai_collab.png" alt="concept illustration" loading="lazy" width="640" height="360"/>
     <h3>The Solution: Hybrid Solver–Learner Systems (augmentation, not replacement)</h3>
     <p>
       Because feasibility and optimality guarantees remain difficult for learned models, the industrial standard is augmentation: the model proposes guidance, and the solver enforces correctness. In practice, learning accelerates search while classical optimization preserves feasibility and proofs.
