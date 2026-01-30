@@ -79,6 +79,49 @@
   <table id="publications" style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
     
     <h2>Selected Publications</h2>
+	 <tr onmouseout="bolt3d_stop()" onmouseover="bolt3d_start()">
+      <td style="padding:16px;width:20%;vertical-align:middle">
+        <div class="one">
+          <div class="two" id='bolt3d_image'><video  width=100% height=100% muted autoplay loop>
+          <source src="images/modest.png" type="video/mp4">
+          Your browser does not support the video tag.
+
+          </video></div>
+          <img src='images/modest.png' width="160">
+        </div>
+        <script type="text/javascript">
+          function bolt3d_start() {
+            document.getElementById('bolt3d_image').style.opacity = "1";
+          }
+
+          function bolt3d_stop() {
+            document.getElementById('bolt3d_image').style.opacity = "0";
+          }
+          bolt3d_stop()
+        </script>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle">
+        <a href="https://www.sciencedirect.com/science/article/pii/S0950705125006033">
+          <span class="papertitle">An overview of sign language processing from natural language processing perspective
+</span>
+        </a>
+        <br>
+        B. Mutlu,
+        
+		<strong>Y. C. Bilge</strong>
+        <br>
+        <em>Computer Science Review</em>, Jan 2026.
+        <br>
+        <!-- <a href="https://">project page</a> -->
+        
+        <p></p>
+        <p>
+		The paper provides an NLP-centric overview of sign language processing, identifying core and missing tasks, analyzing shared challenges with natural language processing, and proposing linguistically grounded research directions for advancing sign language technologies.
+        </p>
+      </td>
+    </tr>
+
+	  
     <tr onmouseout="bolt3d_stop()" onmouseover="bolt3d_start()">
       <td style="padding:16px;width:20%;vertical-align:middle">
         <div class="one">
